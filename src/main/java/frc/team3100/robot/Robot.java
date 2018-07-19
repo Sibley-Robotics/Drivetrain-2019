@@ -31,6 +31,7 @@ public class Robot extends IterativeRobot{
     public static Climber climber;
     public static Elevator elevator;
     public static MainDrive drive;
+    public static Variables varLog;
     public static OI oi;
 
     // Define variables used later in the Robot class
@@ -54,6 +55,7 @@ public class Robot extends IterativeRobot{
         climber = new Climber();
         elevator = new Elevator();
         drive = new MainDrive();
+        varLog = new Variables();
 
         // ALWAYS initialize OI after subsystems
         oi = new OI();
@@ -159,9 +161,9 @@ public class Robot extends IterativeRobot{
         // Starts the scheduler for the teleop period to run the autonomous
         Scheduler.getInstance().run();
         SmartDashboard.putBoolean("autoVal",autoVal);
-        SmartDashboard.putBoolean("cubeHeld",Robot.oi.cubeHeld);
-        SmartDashboard.putBoolean("test",Robot.oi.test);
-        SmartDashboard.putBoolean("test2",Robot.oi.test2);
+        SmartDashboard.putBoolean("cubeHeld",Robot.varLog.cubeHeld);
+        SmartDashboard.putBoolean("test",Robot.varLog.test);
+        SmartDashboard.putBoolean("test2",Robot.varLog.test2);
         SmartDashboard.putData("Autonomous",autoChoice);
         SmartDashboard.putString("autoPriority",gameData + autoPriority.getSelected() + autoType.getSelected() + autoChoice.getSelected());
 

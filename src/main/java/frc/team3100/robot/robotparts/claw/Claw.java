@@ -22,11 +22,6 @@ public class Claw extends Subsystem {
         clawMotors.set(speed);
     }
 
-
-    public void stop() {
-
-    }
-
     public void open() {
         RobotMap.clawCloser.set(false);
         RobotMap.clawOpener.set(true);

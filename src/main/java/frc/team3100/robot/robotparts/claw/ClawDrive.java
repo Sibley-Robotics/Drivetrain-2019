@@ -23,7 +23,7 @@ public class ClawDrive extends Command {
 
     @Override
     protected void execute() {
-        SmartDashboard.putNumber("triggerVal",controller.getLeftTrigger());
+
         if(controller.getLeftTrigger() > triggerError) {
             Robot.claw.run(controller.getLeftTrigger());
         } else if(controller.getRightTrigger() > triggerError) {
@@ -31,7 +31,6 @@ public class ClawDrive extends Command {
         } else {
             Robot.claw.run(0);
         }
-        SmartDashboard.putBoolean("ClawState1",Robot.oi.clawOpenState);
 
     }
 

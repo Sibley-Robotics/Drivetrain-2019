@@ -2,6 +2,7 @@ package frc.team3100.robot.robotparts.climber;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team3100.robot.Robot;
+import frc.team3100.robot.Variables;
 
 public class ClimbingPiston extends Command {
     public ClimbingPiston() {
@@ -10,12 +11,12 @@ public class ClimbingPiston extends Command {
 
     @Override
     public void initialize() {
-        if(Robot.oi.climbState) {
+        if(Robot.varLog.climbState) {
             Robot.climber.out();
-            Robot.oi.climbState = false;
+            Robot.varLog.climbState = false;
         } else {
             Robot.climber.in();
-            Robot.oi.climbState = true;
+            Robot.varLog.climbState = true;
         }
     }
 

@@ -73,7 +73,7 @@ public class MainDrive extends Subsystem {
     }
 
     public boolean encodersOnTarget() {
-        final double ABSOLUTE_TOLERANCE = 3.0; // TODO: Change this to something more reasonable???
+        final double ABSOLUTE_TOLERANCE = 3.0; //
         return Math.abs((leftPodPID.getSetpoint() - leftPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE &&
                 Math.abs((rightPodPID.getSetpoint() - rightPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE;
     }

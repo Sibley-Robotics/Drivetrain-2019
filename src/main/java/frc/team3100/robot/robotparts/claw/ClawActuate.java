@@ -12,12 +12,12 @@ public class ClawActuate extends Command {
 
     @Override
     protected void initialize() {
-        if(Robot.oi.clawOpenState) {
+        if(Robot.varLog.clawOpenState) {
             Robot.claw.close();
-            Robot.oi.clawOpenState = false;
+            Robot.varLog.clawOpenState = false;
         } else {
             Robot.claw.open();
-            Robot.oi.clawOpenState = true;
+            Robot.varLog.clawOpenState = true;
         }
     }
 
