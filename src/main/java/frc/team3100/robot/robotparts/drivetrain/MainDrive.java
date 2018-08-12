@@ -3,8 +3,6 @@ package frc.team3100.robot.robotparts.drivetrain;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.team3100.robot.OI;
-import frc.team3100.robot.Robot;
 import frc.team3100.robot.Variables;
 import frc.team3100.robot.mapping.RobotMap;
 import frc.team3100.robot.pid.DrivePodPIDOutput;
@@ -29,14 +27,14 @@ public class MainDrive extends Subsystem {
         leftPodPID = new PIDController(0.05, 0.00001, 0, leftPodPIDSource,
                 new DrivePodPIDOutput(RobotMap.leftDriveMotor, true));
         leftPodPID.disable();
-        leftPodPID.setOutputRange(-.8, 0.8);
+        leftPodPID.setOutputRange(-1, 1);
         leftPodPID.setAbsoluteTolerance(2);
 
         rightPodPIDSource = new EncoderPIDSource(RobotMap.rightDriveEncoder);
         rightPodPID = new PIDController(0.05, 0.00001, 0, rightPodPIDSource,
                 new DrivePodPIDOutput(RobotMap.rightDriveMotor));
         rightPodPID.disable();
-        rightPodPID.setOutputRange(-0.8, 0.8);
+        rightPodPID.setOutputRange(-1, 1);
         rightPodPID.setAbsoluteTolerance(2);
     }
 

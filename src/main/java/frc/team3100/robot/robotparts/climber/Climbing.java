@@ -30,10 +30,10 @@ public class Climbing extends Command {
     }
     @Override
     public void end() {
-
+        Robot.climber.move(0);
     }
 
     public void interrupted() {
-
+        end();
     }
 }

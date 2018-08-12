@@ -1,5 +1,6 @@
 package frc.team3100.robot;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -115,6 +116,9 @@ public class Robot extends IterativeRobot{
         SmartDashboard.putNumber("Right Encoder D", drive.rightPodPID.getD());
         SmartDashboard.putNumber("Right Encoder Setpoint", 0);
         SmartDashboard.putData(new StartEncoderPID());
+
+        RobotMap.leftDriveMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 30);
+
     }
 
 
@@ -162,10 +166,6 @@ public class Robot extends IterativeRobot{
         Scheduler.getInstance().run();
         SmartDashboard.putBoolean("autoVal",autoVal);
         SmartDashboard.putBoolean("cubeHeld",Robot.varLog.cubeHeld);
-        SmartDashboard.putBoolean("test",Robot.varLog.test);
-        SmartDashboard.putBoolean("test2",Robot.varLog.test2);
-        SmartDashboard.putData("Autonomous",autoChoice);
-        SmartDashboard.putString("autoPriority",gameData + autoPriority.getSelected() + autoType.getSelected() + autoChoice.getSelected());
 
     }
 

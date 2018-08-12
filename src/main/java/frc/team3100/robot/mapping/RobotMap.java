@@ -1,8 +1,9 @@
 package frc.team3100.robot.mapping;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 
@@ -13,14 +14,16 @@ public class RobotMap {
     public static int techController = 2;
 
     //     P W M
-    private static int driveLeftChannel = 1;
-    private static int driveRightChannel = 2;
     private static int elevatorChannel = 4;
     private static int clawChannel = 3;
     private static int platformChannel = 5;
     private static int platformDeployLeftChannel = 6;
     private static int platformDeployRightChannel = 7;
     private static int climberMotorChannel = 8;
+
+    //     C A N
+    private static int driveLeftChannel = 1;
+    private static int driveRightChannel = 0;
 
     //     P C M
     private static int clawCloseChannel = 0;
@@ -67,8 +70,8 @@ public class RobotMap {
     public static XBoxStates techControls = new XBoxStates(techController);
 
     //    Initialize speed controllers          This is the ONLY spot sparks should be referenced
-    public static SpeedController leftDriveMotor = new Spark(driveLeftChannel);
-    public static SpeedController rightDriveMotor = new Spark(driveRightChannel);
+    public static WPI_TalonSRX leftDriveMotor = new WPI_TalonSRX(driveLeftChannel);
+    public static WPI_TalonSRX rightDriveMotor = new WPI_TalonSRX(driveRightChannel);
     public static SpeedController elevatorMotor = new Spark(elevatorChannel);
     public static SpeedController clawMotors = new Spark(clawChannel);
     public static SpeedController platformMotor = new Spark(platformChannel);

@@ -26,4 +26,5 @@ public class AutoMaster extends CommandGroup {
         addSequential(new DriveStraightDistance(10));
 
     }
+
 }

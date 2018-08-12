@@ -36,6 +36,6 @@ public class ClimbingPiston extends Command {
     }
 
     public void interrupted() {
-
+        end();
     }
 }
