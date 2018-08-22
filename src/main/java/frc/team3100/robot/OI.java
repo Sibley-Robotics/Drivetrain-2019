@@ -2,8 +2,8 @@ package frc.team3100.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.team3100.robot.autonomous.AutoArmMotion;
 import frc.team3100.robot.robotparts.claw.ClawActuate;
-import frc.team3100.robot.robotparts.climber.ClimbingPiston;
 import frc.team3100.robot.mapping.RobotMap;
 import frc.team3100.robot.mapping.XBoxStates;
 
@@ -24,7 +24,9 @@ public class OI {
 
 
         aTech.whenPressed(new ClawActuate());
-        bTech.whenPressed(new ClimbingPiston());
+        xTech.whenPressed(new AutoArmMotion(Variables.ArmPosition.FRONTGROUND));
+        bTech.whenPressed(new AutoArmMotion(Variables.ArmPosition.BACKGROUND));
+        yTech.whenPressed(new AutoArmMotion(Variables.ArmPosition.FRONTSWITCH));
 
 
 

@@ -11,10 +11,11 @@ public class Variables {
         BOTTOM
     }
 
-    public enum ElevatorPosition {
-        GROUND,
-        SWITCH,
-        SCALE
+    public enum ArmPosition {
+        FRONTGROUND,
+        BACKGROUND,
+        FRONTSWITCH,
+        BACKSWITCH
     }
     public boolean clawOpenState = false;
     public boolean climbState = false;
