@@ -20,5 +20,6 @@ public class Variables {
     public boolean clawOpenState = false;
     public boolean climbState = false;
     public boolean cubeHeld = false;
+    public double drivePIDRotchange = 0;
 }
 

@@ -1,90 +1,73 @@
 package frc.team3100.robot.robotparts.drivetrain;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.team3100.robot.Variables;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team3100.robot.Robot;
 import frc.team3100.robot.mapping.RobotMap;
-import frc.team3100.robot.pid.DrivePodPIDOutput;
-import frc.team3100.robot.pid.EncoderPIDSource;
+import frc.team3100.robot.mapping.XBoxStates;
 
 
-public class MainDrive extends Subsystem {
+public class MainDrive extends PIDSubsystem {
 
-    private final EncoderPIDSource leftPodPIDSource;
-    private final EncoderPIDSource rightPodPIDSource;
-    public final PIDController leftPodPID;
-    public final PIDController rightPodPID;
-
-
-
-    public DifferentialDrive driveTrain = new DifferentialDrive(RobotMap.leftDriveMotor,RobotMap.rightDriveMotor);
-
-
+    private DifferentialDrive driveTrain = new DifferentialDrive(RobotMap.leftDriveMotor,RobotMap.rightDriveMotor);
+    private static SpeedController leftMotor = RobotMap.leftDriveMotor;
+    private static SpeedController rightMotor = RobotMap.rightDriveMotor;
+    private static XBoxStates controller = RobotMap.techControls;
+    private double dMoveLimit = SmartDashboard.getNumber("MoveLimitValue",0.1);
+    private double dRotateLimit = SmartDashboard.getNumber("RotateLimitValue",0.1);
+    private double limitedMove = 0;
+    private double limitedRotate = 0;
 
     public MainDrive() {
-        leftPodPIDSource = new EncoderPIDSource(RobotMap.leftDriveEncoder);
-        leftPodPID = new PIDController(0.05, 0.00001, 0, leftPodPIDSource,
-                new DrivePodPIDOutput(RobotMap.leftDriveMotor, true));
-        leftPodPID.disable();
-        leftPodPID.setOutputRange(-1, 1);
-        leftPodPID.setAbsoluteTolerance(2);
+        super("MainDrive", SmartDashboard.getNumber("P",0),
+                SmartDashboard.getNumber("I",0),
+                SmartDashboard.getNumber("D",0));
+        getPIDController().setInputRange(0,360);
+        getPIDController().setContinuous(true);
+        setOutputRange(-1,1);
 
-        rightPodPIDSource = new EncoderPIDSource(RobotMap.rightDriveEncoder);
-        rightPodPID = new PIDController(0.05, 0.00001, 0, rightPodPIDSource,
-                new DrivePodPIDOutput(RobotMap.rightDriveMotor));
-        rightPodPID.disable();
-        rightPodPID.setOutputRange(-1, 1);
-        rightPodPID.setAbsoluteTolerance(2);
+    }
+
+    protected double returnPIDInput() {
+        return RobotMap.gyro.getAngle(); // returns the sensor value that is providing the feedback for the system
+    }
+
+    protected void usePIDOutput(double output) {
+        SmartDashboard.putNumber("drivePIDoutput",output);
+        Robot.varLog.drivePIDRotchange = output;
     }
 
     public void initDefaultCommand() {setDefaultCommand(new Drive());}
 
-    public void driveArcade(double move, double rotate) {
-        driveTrain.arcadeDrive(move, rotate);
-    }
-
-    public void driveTank(double left,double right) {
-        driveTrain.tankDrive(left,right);
-    }
 
     public void stop() {
-        driveTank(0, 0);
+        driveArcade(0,0);
     }
 
-    public void setEncoderPID(Variables.RelativeDirection side, double p, double i, double d) {
-        if (side == Variables.RelativeDirection.LEFT) {
-            leftPodPID.setPID(p, i, d);
-        } else {
-            rightPodPID.setPID(p, i, d);
+    public void driveArcade(double inputMove, double inputRotate) {
+        inputRotate += Robot.varLog.drivePIDRotchange;
+        double dMove = inputMove - limitedMove;
+        if (dMove > dMoveLimit) {
+            dMove = dMoveLimit;
+        } else if (dMove < -dMoveLimit) {
+            dMove = -dMoveLimit;
         }
+
+        limitedMove += dMove;
+        SmartDashboard.putNumber("driveMove", limitedMove);
+
+        double dRotate = inputRotate - limitedRotate;
+        if(dRotate > dRotateLimit) {
+            dRotate = dRotateLimit;
+        } else if (dRotate < -dRotateLimit) {
+            dRotate = -dRotateLimit;
+        }
+
+        limitedRotate += dRotate;
+        SmartDashboard.putNumber("driveRotate",limitedRotate);
+
+        driveTrain.arcadeDrive(limitedMove,limitedRotate);
     }
-
-    public void setDistance(double distance) {
-        leftPodPID.setSetpoint(distance);
-        rightPodPID.setSetpoint(distance);
-    }
-
-    public void setDistance(double leftDistance, double rightDistance) {
-        leftPodPID.setSetpoint(leftDistance);
-        rightPodPID.setSetpoint(rightDistance);
-    }
-
-    public boolean encodersOnTarget() {
-        final double ABSOLUTE_TOLERANCE = 3.0; //
-        return Math.abs((leftPodPID.getSetpoint() - leftPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE &&
-                Math.abs((rightPodPID.getSetpoint() - rightPodPIDSource.pidGet())) <= ABSOLUTE_TOLERANCE;
-    }
-
-    public void enableEncoderPID() {
-        leftPodPID.enable();
-        rightPodPID.enable();
-    }
-
-    public void disableEncoderPID() {
-        leftPodPID.disable();
-        rightPodPID.disable();
-    }
-
-
 }

@@ -9,22 +9,33 @@ public class Drive extends Command {
 
     private double move;
     private double rotate;
+    private boolean ran = true;
+    private double JoystickEpsilon = 0.1;
 
     public Drive() {
         requires(Robot.drive);
     }
 
     protected void initialize() {
+        Robot.drive.disable();
     }
 
     protected void execute() {
-        move = RobotMap.driveControls.getLeftStickY();
-        rotate = RobotMap.driveControls.getRightStickX();
-
         double scalar = SmartDashboard.getNumber("Drivetrain Scalar", 1);
+        move = RobotMap.driveControls.getLeftStickY() * scalar;
+        rotate = RobotMap.driveControls.getRightStickX() * scalar;
 
-        move *= scalar;
-        rotate *= scalar;
+        if(Math.abs(rotate) > JoystickEpsilon) {
+            if(!ran) {
+                Robot.drive.disable();
+                ran = true;
+            }
+        } else {
+            if(ran) {
+                Robot.drive.setSetpoint(RobotMap.gyro.getAngle());
+                Robot.drive.enable();
+            }
+        }
 
         Robot.drive.driveArcade(move, rotate);
     }
@@ -34,7 +45,7 @@ public class Drive extends Command {
     }
 
     protected void end() {
-        Robot.drive.stop();
+
     }
 
     protected void interrupted() {
