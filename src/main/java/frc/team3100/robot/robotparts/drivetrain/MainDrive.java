@@ -43,6 +43,8 @@ public class MainDrive extends PIDSubsystem {
 
 
     public void stop() {
+        limitedRotate = 0;
+        limitedMove = 0;
         driveArcade(0,0);
     }
 
