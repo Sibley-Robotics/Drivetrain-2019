@@ -2,7 +2,6 @@ package frc.team3100.robot.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team3100.robot.Robot;
-import frc.team3100.robot.Variables.ArmPosition;
 import frc.team3100.robot.mapping.RobotMap;
 
 public class AutoPivotTurn extends Command {

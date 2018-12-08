@@ -2,10 +2,12 @@ package frc.team3100.robot.robotparts.claw;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import frc.team3100.robot.Dashboard;
 import frc.team3100.robot.mapping.RobotMap;
 
 
-public class Claw extends Subsystem {
+public class Claw extends Subsystem implements Dashboard.DashboardUpdatable{
 
 
     private SpeedController clawMotors = RobotMap.clawMotors;
@@ -32,7 +34,12 @@ public class Claw extends Subsystem {
         RobotMap.clawCloser.set(true);
 
     }
+    public void initSD() {
+    }
 
+    public void updateSD() {
+
+    }
 
 
 

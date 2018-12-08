@@ -44,7 +44,7 @@ public class ArmMotion extends Command {
     }
 
     public void interrupted() {
-        end();
+
     }
 }
 

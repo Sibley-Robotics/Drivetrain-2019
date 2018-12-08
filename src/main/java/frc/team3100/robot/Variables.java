@@ -12,11 +12,23 @@ public class Variables {
     }
 
     public enum ArmPosition {
-        FRONTGROUND,
-        BACKGROUND,
-        FRONTSWITCH,
-        BACKSWITCH
+        FRONTGROUND(-1000),
+        BACKGROUND(1000),
+        FRONTSWITCH(-500),
+        BACKSWITCH(500);
+
+        private final int position;
+
+        ArmPosition(int position) {
+            this.position = position;
+        }
+
+        public int getPosition() {
+            return position;
+        }
     }
+
+
     public boolean clawOpenState = false;
     public boolean climbState = false;
     public boolean cubeHeld = false;

@@ -3,13 +3,15 @@ package frc.team3100.robot.robotparts.drivetrain;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team3100.robot.Dashboard;
 import frc.team3100.robot.Robot;
 import frc.team3100.robot.mapping.RobotMap;
 import frc.team3100.robot.mapping.XBoxStates;
 
 
-public class MainDrive extends PIDSubsystem {
+public class MainDrive extends PIDSubsystem implements Dashboard.DashboardUpdatable {
 
     private DifferentialDrive driveTrain = new DifferentialDrive(RobotMap.leftDriveMotor,RobotMap.rightDriveMotor);
     private static SpeedController leftMotor = RobotMap.leftDriveMotor;
@@ -71,5 +73,13 @@ public class MainDrive extends PIDSubsystem {
         SmartDashboard.putNumber("driveRotate",limitedRotate);
 
         driveTrain.arcadeDrive(limitedMove,limitedRotate);
+    }
+
+    public void initSD() {
+        LiveWindow.add(getPIDController());
+    }
+
+    public void updateSD() {
+
     }
 }

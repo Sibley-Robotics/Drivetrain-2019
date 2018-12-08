@@ -17,30 +17,34 @@ public class AutoDriveDistance extends Command {
     }
 
     public void initialize() {
+        /*
         Robot.drive.setSetpoint(RobotMap.gyro.getAngle());
         Robot.drive.enable();
         RobotMap.leftDriveEncoder.reset();
         RobotMap.rightDriveEncoder.reset();
-
+        */
     }
 
     public void execute() {
+        /*
         if(targetValLeft > RobotMap.leftDriveEncoder.get()) {
             Robot.drive.driveArcade( (1-(RobotMap.leftDriveEncoder.get()/inputTarget) + .1) ,0);
         } else {
             Robot.drive.driveArcade( -1 * (1-(RobotMap.leftDriveEncoder.get()/inputTarget) + .1),0);
         }
-
+        */
 
 
     }
 
     public boolean isFinished() {
+        /*
         if(Math.abs(RobotMap.leftDriveEncoder.get())-Math.abs(inputTarget) < 100) {
             return true;
         } else {
             return false;
-        }
+        } */
+        return true;
     }
 
     public void end() {

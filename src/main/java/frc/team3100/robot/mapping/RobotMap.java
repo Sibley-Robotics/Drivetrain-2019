@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 public class RobotMap {
 
     //     C O N T R O L L E R S
-    public static int driveController = 1;
-    public static int techController = 2;
+    private static int driveController = 1;
+    private static int techController = 2;
 
     //     P W M
-    private static int armChannel = 4;
+    private static int armChannel = 1;
     private static int clawChannel = 3;
 
     //     C A N
@@ -63,19 +63,15 @@ public class RobotMap {
     public static XBoxStates driveControls = new XBoxStates(driveController);
     public static XBoxStates techControls = new XBoxStates(techController);
 
-    //    Initialize speed controllers          This is the ONLY spot sparks should be referenced
-    public static WPI_TalonSRX leftDriveMotor = new WPI_TalonSRX(driveLeftChannel);
-    public static WPI_TalonSRX rightDriveMotor = new WPI_TalonSRX(driveRightChannel);
+    //    Initialize speed controllers
+    public static SpeedController leftDriveMotor = new WPI_TalonSRX(driveLeftChannel);
+    public static SpeedController rightDriveMotor = new WPI_TalonSRX(driveRightChannel);
     public static SpeedController armMotor = new Spark(armChannel);
     public static SpeedController clawMotors = new Spark(clawChannel);
 
     //    Initialize pneumatic controllers (solenoids)
     public static Solenoid clawCloser = new Solenoid(clawCloseChannel);
     public static Solenoid clawOpener = new Solenoid(clawOpenChannel);
-    public static Solenoid UPP2 = new Solenoid(UPP2Channel);
-    public static Solenoid UPP3 = new Solenoid(UPP3Channel);
-    public static Solenoid UPP4 = new Solenoid(UPP4Channel);
-    public static Solenoid UPP5 = new Solenoid(UPP5Channel);
 
     //    Initialize servos
 
@@ -84,8 +80,6 @@ public class RobotMap {
     public static Gyro gyro = new ADXRS450_Gyro();
     public static DigitalInput armFrontButton = new DigitalInput(armFrontButtonChannel);
     public static DigitalInput armBackButton = new DigitalInput(armBackButtonChannel);
-    public static Encoder leftDriveEncoder = new Encoder(leftDriveChannelA,leftDriveChannelB);
-    public static Encoder rightDriveEncoder = new Encoder(rightDriveChannelA,rightDriveChannelB);
     public static Encoder armEncoder = new Encoder(armEncoderAChannel,armEncoderBChannel);
 
 
