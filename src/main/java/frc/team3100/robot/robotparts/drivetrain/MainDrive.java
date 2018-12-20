@@ -21,7 +21,6 @@ public class MainDrive extends Subsystem implements Dashboard.DashboardUpdatable
     private double dMoveLimit = 0.1;
     private double limitedMoveLeft = 0;
     private double limitedMoveRight = 0;
-    drivetrain1 =
 
     public MainDrive() {
         super("MainDrive");
