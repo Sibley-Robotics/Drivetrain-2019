@@ -11,6 +11,10 @@ public class Variables {
         BOTTOM
     }
 
+    public enum DriveTrainStates {
+        high,
+        low
+    }
     public enum ArmPosition {
         FRONTGROUND(-1000),
         BACKGROUND(1000),
@@ -32,6 +36,7 @@ public class Variables {
     public boolean clawOpenState = false;
     public boolean climbState = false;
     public boolean cubeHeld = false;
+    public static DriveTrainStates driveTrainState = DriveTrainStates.low;
     public double drivePIDRotchange = 0;
 
 }

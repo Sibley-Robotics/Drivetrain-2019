@@ -1,13 +1,10 @@
 package frc.team3100.robot;
 
-import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team3100.robot.robotparts.claw.Claw;
 import frc.team3100.robot.robotparts.drivetrain.MainDrive;
-import frc.team3100.robot.robotparts.arm.Arm;
 import frc.team3100.robot.mapping.RobotMap;
 
 
@@ -15,8 +12,7 @@ public class Robot extends IterativeRobot{
     private Command AutoChosen;
     private boolean ran = false;
     // Define subsystems for Commands to access
-    public static Claw claw;
-    public static Arm arm;
+    public static Compressor compressor;
     public static MainDrive drive;
     public static Variables varLog;
     public static OI oi;
@@ -33,8 +29,7 @@ public class Robot extends IterativeRobot{
         gameData = DriverStation.getInstance().getGameSpecificMessage();
 
         //Creates instances of all of the subsystems for the autonomous to access.
-        claw = new Claw();
-        arm = new Arm();
+        compressor = new Compressor();
         drive = new MainDrive();
         varLog = new Variables();
 
@@ -42,11 +37,12 @@ public class Robot extends IterativeRobot{
         oi = new OI();
 
 
-
+        RobotMap.leftDriveMotor2.follow(RobotMap.leftDriveMotor1);
+        RobotMap.leftDriveMotor3.follow(RobotMap.leftDriveMotor1);
+        RobotMap.rightDriveMotor2.follow(RobotMap.rightDriveMotor2);
+        RobotMap.rightDriveMotor3.follow(RobotMap.rightDriveMotor3);
 
         SmartDashboard.putData("MainDrive", drive);
-        RobotMap.clawOpener.set(false);
-        RobotMap.clawCloser.set(true);
         RobotMap.gyro.calibrate();
 
     }

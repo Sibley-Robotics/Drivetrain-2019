@@ -27,8 +27,6 @@ public class Dashboard {
 	public static void initDashboard() {
 
         subsystems.add(Robot.drive);
-        subsystems.add(Robot.arm);
-        subsystems.add(Robot.claw);
 		for (DashboardUpdatable subsystem : subsystems) {
 			subsystem.initSD();
 		}

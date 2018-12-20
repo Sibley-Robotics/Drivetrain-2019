@@ -15,12 +15,6 @@ public class AutoPivotTurn extends Command {
     }
 
     public void initialize() {
-        targetVal = RobotMap.gyro.getAngle() + inputTarget;
-        if (targetVal < 0) {
-            targetVal += 360;
-        }
-        Robot.drive.setSetpoint(targetVal);
-        Robot.drive.enable();
     }
 
     public void execute() {

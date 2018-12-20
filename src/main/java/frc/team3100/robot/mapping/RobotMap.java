@@ -11,33 +11,23 @@ public class RobotMap {
 
     //     C O N T R O L L E R S
     private static int driveController = 1;
-    private static int techController = 2;
 
     //     P W M
-    private static int armChannel = 1;
-    private static int clawChannel = 3;
 
     //     C A N
-    private static int driveLeftChannel = 1;
-    private static int driveRightChannel = 0;
+    private static int driveLeft1Channel = 1;
+    private static int driveLeft2Channel = 2;
+    private static int driveLeft3Channel = 3;
+    private static int driveRight1Channel = 4;
+    private static int driveRight2Channel = 5;
+    private static int driveRight3Channel = 6;
+
 
     //     P C M
-    private static int clawCloseChannel = 0;
-    private static int clawOpenChannel = 1;
-    private static int UPP2Channel = 2;
-    private static int UPP3Channel = 3;
-    private static int UPP4Channel = 4;
-    private static int UPP5Channel = 5;
+    private static int shiftDriveLowChannel = 0;
+    private static int shiftDriveHighChannel = 1;
 
     //     D I O
-    private static int armEncoderAChannel = 0;
-    private static int armEncoderBChannel = 1;
-    private static int armFrontButtonChannel = 4;
-    private static int armBackButtonChannel = 5;
-    private static int leftDriveChannelA = 6;
-    private static int leftDriveChannelB = 7;
-    private static int rightDriveChannelA = 8;
-    private static int rightDriveChannelB = 9;
 
     //     X B O X
     public static final int rightXAxisChannel = 4;
@@ -61,26 +51,26 @@ public class RobotMap {
 
     //    Initialize XBox Controllers
     public static XBoxStates driveControls = new XBoxStates(driveController);
-    public static XBoxStates techControls = new XBoxStates(techController);
 
     //    Initialize speed controllers
-    public static SpeedController leftDriveMotor = new WPI_TalonSRX(driveLeftChannel);
-    public static SpeedController rightDriveMotor = new WPI_TalonSRX(driveRightChannel);
-    public static SpeedController armMotor = new Spark(armChannel);
-    public static SpeedController clawMotors = new Spark(clawChannel);
+    public static TalonSRX leftDriveMotor1 = new TalonSRX(driveLeft1Channel);
+    public static TalonSRX leftDriveMotor2 = new TalonSRX(driveLeft2Channel);
+    public static TalonSRX leftDriveMotor3 = new TalonSRX(driveLeft3Channel);
+    public static TalonSRX rightDriveMotor1 = new TalonSRX(driveRight1Channel);
+    public static TalonSRX rightDriveMotor2 = new TalonSRX(driveRight2Channel);
+    public static TalonSRX rightDriveMotor3 = new TalonSRX(driveRight3Channel);
+
 
     //    Initialize pneumatic controllers (solenoids)
-    public static Solenoid clawCloser = new Solenoid(clawCloseChannel);
-    public static Solenoid clawOpener = new Solenoid(clawOpenChannel);
+    public static Solenoid shiftDriveLow = new Solenoid(shiftDriveLowChannel);
+    public static Solenoid shiftDriveHigh = new Solenoid(shiftDriveHighChannel);
 
     //    Initialize servos
 
 
     //    Initialize sensors
     public static Gyro gyro = new ADXRS450_Gyro();
-    public static DigitalInput armFrontButton = new DigitalInput(armFrontButtonChannel);
-    public static DigitalInput armBackButton = new DigitalInput(armBackButtonChannel);
-    public static Encoder armEncoder = new Encoder(armEncoderAChannel,armEncoderBChannel);
+
 
 
 
